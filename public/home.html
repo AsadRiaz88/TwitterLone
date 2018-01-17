@@ -1,0 +1,155 @@
+<nav class="navbar navbar-default navbar-inverse" role="navigation" ng-show="currentUser">
+<div class="container-fluid">
+<!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Login dropdown</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+        </li>
+        <li><img class="navbar-brand" data-ng-src="data:image/png;base64,{{profileIMG}}"/></li>
+        <li class="dropdown">
+        <a href="" class="dropdown-toggle" data-toggle="dropdown"><b>hello, {{currentUser}}</b> <span class="caret"></span></a>
+        </li>
+        <li><p ng-click="logout()" class="navbar-text">Logout</p></li>
+        <li><p class="navbar-text"><a href="#/updateprofile">Update Profile</a></p></li>
+        </ul>
+    <div class="navbar-form navbar-right">
+    <input type="text" class="form-control" ng-model="searchtxt" placeholder="Search">
+    </div>
+    </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+<div class="col-md-6" >
+<div class="wrapper" ng-hide="currentUser">
+<form action="" method="post" name="Login_Form" class="form-signin">
+<h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
+<hr class="colorgraph"><br>
+<input type="text" class="form-control" name="Username" placeholder="Username" required="" autofocus="" ng-model="username"/>
+<input type="password" class="form-control" name="Password" placeholder="Password" required="" ng-model="password"/>
+<input type="button" value="Login" class="btn btn-lg btn-primary btn-block" ng-click="signin()"></input>
+<a class="form-control" href="#/signup">Not a Member signUp</a>
+</form>
+</div>
+</div>
+
+<div class="container" ng-show="currentUser">
+<div ng-show="currentUser">
+<input ng-model="newVar" class="form-control add-todo" type="text" size="30" placeholder="hello say somthing to srver .... " >
+<button class="btn btn-success" type="button" ng-click="submitnewVar()">submit</button>
+</div>
+<div class="row">
+<div >
+<h3 ng-repeat="myvar in myVar | orderBy:'-' | limitTo: listLimit | filter : searchtxt">
+<div class="container">
+<div class="col-md-5">
+<div class="panel panel-default">
+<div class="panel-body">
+<section class="post-heading">
+
+<div class="row">
+<div class="col-md-11">
+<div class="media">
+  <div ng-repeat="person in UsersArray | filter: {_id:myvar.user}">
+    <div ng-init="indexIS=UsersArray.indexOf(person)"><div>
+<div class="media-left">
+<a href="">
+<img class="photo-profile" width="32" height="32" data-ng-src="data:image/png;base64,{{UsersArray[indexIS].profileimg}}" alt="Mouse0270" />
+</a>
+</div>
+<div class="media-body">
+<a href="#" class="anchor-username"><h4 class="media-heading">
+
+    {{UsersArray[indexIS].username}}
+
+  </h4></a>
+<a href="#" class="anchor-time"{{myvar.timeIs}}</a>
+</div>
+  </div>
+</div>
+</div>
+
+</div>
+<div id="content1" ng-show="myvar.username==currentUser">
+<a href ng-click="removeVar(myvar)" class="ribbon">
+<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+</div>
+</section>
+<section class="post-body">
+<p>{{myvar.text}}</p>
+</section>
+<section class="post-footer">
+<hr>
+<div class="post-footer-option container">
+<ul class="list-unstyled">
+<li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
+<li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
+<li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
+</ul>
+
+</div>
+
+<div class="post-footer-comment-wrapper">
+
+
+
+
+        <div class="actionBox">
+
+          <form class="form-inline" role="form">
+              <div >
+                  <input class="form-control" ng-model="comment[myvar._id]" type="text" placeholder="Your comments" />
+                  <button class="btn btn-default" ng-click="submitcomment(comment[myvar._id],myvar._id)">Add</button>
+                </div>
+          </form>
+              <h3 ng-repeat="comment in myvar.commentLists | orderBy:'-'" >
+                <ul class="commentList">
+
+                  <div class="commentText">
+
+                <li>
+
+                  <div ng-repeat="person in UsersArray | filter: {_id:comment.commentby}">
+                    <div ng-init="indexIS=UsersArray.indexOf(person)"><div>
+                  <p class="">  <img class="photo-profile" width="32" height="32" data-ng-src="data:image/png;base64,{{UsersArray[indexIS].profileimg}}" alt="Mouse0270" />
+
+                        {{UsersArray[indexIS].username}}</p> <span class="date sub-text">{{comment.timeIS}}</span>
+
+
+                  <section class="post-body">
+                    <div id="content1" ng-show="comment.commentby==currentUser">
+                    <a href=""  ng-click="removecomment(comment,myvar._id)"  class="ribbon">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    </div>
+                  <p>{{comment.comment}}</p>
+                  </section>
+                </div>
+                </li>
+
+                            </ul>
+                  </div>
+
+
+
+    </div>
+</div>
+
+</section>
+
+</div>
+</div>
+</div>
+<span class="glyphicon" aria-hidden="true"></span>
+</h3>
+<load-more></load-more>
+</div>
+</div>
+</div>
+</div>

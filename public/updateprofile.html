@@ -1,0 +1,41 @@
+<div>
+<form class="form-horizontal" action='' method="POST">
+<fieldset>
+<div id="legend">
+<legend class="">Update Profile</legend>
+</div>
+<div class="control-group">
+<!-- Username -->
+<label class="control-label" for="username">Username</label>
+<div class="controls">
+<input type="text" id="username" name="username" placeholder="{{currentUser}}" class="input-xlarge" ng-model="updatedusername">
+<p class="help-block">Username can contain any letters or numbers, without spaces</p>
+</div>
+</div>
+<div class="control-group">
+<!-- Password-->
+<label class="control-label" for="password">New Password</label>
+<div class="controls">
+<input type="password" id="password" name="password" ng-model="updatedpassword" placeholder="" class="input-xlarge">
+<p class="help-block" >Password should be at least 4 characters</p>
+</div>
+<div class="container">
+<div class="row" ng-controller="SignupController">
+<div class="col-md-6">
+<input type="file" fileinput="file" name="profileimg" ng-model="profileimg" filepreview="filepreview" />
+</div>
+<div class="col-md-6">
+<img ng-src="{{filepreview}}" class="img-responsive" ng-show="filepreview"/>
+</div>
+</div>
+</div>
+</div>
+<div class="control-group">
+<!-- Button -->
+<div class="controls">
+<input type="button" value="Register" class="btn btn-success" ng-click="submitSignup()"></input>
+</div>
+</div>
+</fieldset>
+</form>
+</div>
